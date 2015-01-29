@@ -1,7 +1,7 @@
 .PHONY: install create-env install-env help
 
 ENV-DIR = ~/env-noema
-ENV = @. $(ENV-DIR)/bin/activate
+ENV = . $(ENV-DIR)/bin/activate
 REQ = requirements.txt
 
 help:
@@ -22,6 +22,7 @@ create-env:
 	fi\
 
 install-env-deps:
+	@echo Check requirements...;\
 	$(ENV) && pip install -r $(REQ) --upgrade
 
 install:
