@@ -10,6 +10,7 @@ class Message(Model):
     id = AutoField(primary_key=True)
     menu_item = ForeignKey(MenuItem, null=False, blank=False)
     content = TextField(default='', blank=True, null=False)
+    parent = ForeignKey('self', null=True, default=None, blank=True)
 
     class Meta:
         db_table = 'message'
