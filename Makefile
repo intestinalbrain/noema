@@ -1,6 +1,7 @@
-.PHONY: install create-env install-env help
+.PHONY: install create-env install-env help migrate
 
 BASE = noema
+MAINDIR = ~/work/$(BASE)
 ENV-DIR = ~/env-$(BASE)
 ENV = . $(ENV-DIR)/bin/activate
 REQ = requirements.txt
@@ -34,3 +35,8 @@ create-db:
 
 install:
 	@echo Not implemented yet
+
+migrate:
+	@echo Create migrations...;\
+	$(ENV) && python $(MAINDIR)/$(BASE)_project/manage.py migrate;\
+	echo Migrations done 
