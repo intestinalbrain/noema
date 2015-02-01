@@ -1,3 +1,5 @@
 # dirs
 
 .idea/
+*.pyc
+

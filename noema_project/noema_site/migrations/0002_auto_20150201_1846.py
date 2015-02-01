@@ -5,34 +5,49 @@ from django.db import models, migrations, transaction
 
 
 def create_menus(apps, schema_editor):
-    sid = transaction.savepoint()
-    try:
-        noema_menu_schema = {'news': {'name': u'Новости',
-                                      'parent': None},
-                             'poster': {'name': u'Постер',
-                                        'parent': 'news'},
-                             'gallery': {'name': u'Галерея',
+    noema_menu_schema = {'news': {'name': u'Новости',
+                                  'parent': None},
+                         'poster': {'name': u'Постер',
+                                    'parent': 'news'},
+                         'gallery': {'name': u'Галерея',
+                                     'parent': 'news'},
+                         'discography': {'name': u'Дискография',
                                          'parent': 'news'},
-                             'discography': {'name': u'Дискография',
-                                             'parent': 'news'},
-                             'band': {'name': u'О группе',
-                                      'parent': None}}
+                         'band': {'name': u'О группе',
+                                  'parent': None}}
 
-        Menu = apps.get_model('noema_site', 'Menu')
-        menu = Menu(code='noema', name='noema')
-        menu.save()
+    Menu = apps.get_model('noema_site', 'Menu')
+    menu = Menu(code='noema', name='noema')
+    menu.save()
 
-        menu_id = menu.id
+    parents = {}
 
-        item_code_list = []
+    MenuItem = apps.get_model('noema_site', 'MenuItem')
 
-        for code, attrs in noema_menu_schema.items():
-            pass
+    def _add_menu(code, attrs):
+        name = attrs['name']
+        parent_code = attrs['parent']
+        if parent_code:
+            if parent_code in parents:
+                parent = MenuItem.objects.get(id=parents[parent_code])
+            else:
+                parent_attrs = noema_menu_schema[parent_code]
+                parent = _add_menu(parent_code, parent_attrs)
+                parent_id = parent.id
+                parents[parent_code] = parent_id
+        else:
+            parent = None
 
-        transaction.savepoint_commit(sid)
-    except:
-        transaction.savepoint_rollback(sid)
+        menu_item = MenuItem(code=code, name=name, parent=parent, menu=menu)
+        menu_item.save()
+        return menu_item
 
+
+    for code, attrs in noema_menu_schema.items():
+        if code in parents:
+            continue
+        menu_item = _add_menu(code, attrs)
+        parents[menu_item.code] = menu_item.id
 
 
 class Migration(migrations.Migration):
