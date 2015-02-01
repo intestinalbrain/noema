@@ -5,7 +5,6 @@ from django.db.models import (Model, AutoField, CharField,
 
 from noema_site.menu.models import MenuItem
 
-
 class News(Model):
     id = AutoField(primary_key=True)
     menu_item = ForeignKey(MenuItem, null=False, blank=False)
@@ -13,6 +12,11 @@ class News(Model):
 
     class Meta:
         db_table = 'news'
+
+    def context(self):
+        for news_item in NewsItem.objects.filter(news=self):
+            pass
+
 
 
 class NewsItem(Model):

@@ -6,13 +6,21 @@
 </head>
 <body>
 
-{% if news_list %}
-    {% for news in news_list %}
-        <a href="/news/{{ news.id }}">{{ news.prevew }}</a>
+<div class="menu_noema">
+    {% for menu_item in menu_list %}
+        <a href="/{{ menu_item.code }}">{{ menu_item.name }}</a>
     {% endfor %}
-{% else %}
-    <p>К сожалению, новостей пока нет</p>
-{% endif %}
+</div>
 
+<div class="news_content">
+    {% if news_list %}
+        {% for news in news_list %}
+            <a href="/news/{{ news.id }}">{{ news.title }}</a>
+            <p>{{ news.preview }}</p>
+        {% endfor %}
+    {% else %}
+        <p>К сожалению, новостей пока нет</p>
+    {% endif %}
+</div>
 </body>
 </html>
