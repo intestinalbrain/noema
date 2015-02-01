@@ -64,6 +64,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
+        'ATOMIC_REQUESTS': True
     }
 }
 

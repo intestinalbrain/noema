@@ -1,31 +1,37 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import models, migrations, transaction
 
 
 def create_menus(apps, schema_editor):
-    noema_menu_schema = {'news': {'name': u'Новости',
-                                  'parent': None},
-                         'poster': {'name': u'Постер',
-                                    'parent': 'news'},
-                         'gallery': {'name': u'Галерея',
-                                     'parent': 'news'},
-                         'discography': {'name': u'Дискография',
+    sid = transaction.savepoint()
+    try:
+        noema_menu_schema = {'news': {'name': u'Новости',
+                                      'parent': None},
+                             'poster': {'name': u'Постер',
+                                        'parent': 'news'},
+                             'gallery': {'name': u'Галерея',
                                          'parent': 'news'},
-                         'band': {'name': u'О группе',
-                                  'parent': None}}
+                             'discography': {'name': u'Дискография',
+                                             'parent': 'news'},
+                             'band': {'name': u'О группе',
+                                      'parent': None}}
 
-    Menu = apps.get_model('noema_site', 'Menu')
-    menu = Menu(code='noema', name='noema')
-    menu.save()
+        Menu = apps.get_model('noema_site', 'Menu')
+        menu = Menu(code='noema', name='noema')
+        menu.save()
 
-    menu_id = menu.id
+        menu_id = menu.id
 
-    item_code_list = []
+        item_code_list = []
 
-    for code, attrs in noema_menu_schema.items():
+        for code, attrs in noema_menu_schema.items():
+            pass
 
+        transaction.savepoint_commit(sid)
+    except:
+        transaction.savepoint_rollback(sid)
 
 
 
