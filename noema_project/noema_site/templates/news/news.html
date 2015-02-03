@@ -15,7 +15,7 @@
 <div class="news_content">
     {% if news_list %}
         {% for news in news_list %}
-            <a href="/news/{{ news.id }}">{{ news.title }}</a>
+            <a href="{% url 'one_news' news.id %} ">{{ news.title }}</a>
             <p>{{ news.preview }}</p>
         {% endfor %}
     {% else %}

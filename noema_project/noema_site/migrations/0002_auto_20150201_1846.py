@@ -7,7 +7,7 @@ from django.db import models, migrations, transaction
 def create_menus(apps, schema_editor):
     noema_menu_schema = {'news': {'name': u'Новости',
                                   'parent': None},
-                         'poster': {'name': u'Постер',
+                         'poster': {'name': u'Афиша',
                                     'parent': 'news'},
                          'gallery': {'name': u'Галерея',
                                      'parent': 'news'},
