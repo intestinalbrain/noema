@@ -2,7 +2,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>{{ title }}</title>
+    {% load staticfiles %}
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+    <title><p>{{ title }}</p></title>
 </head>
 <body>
 <div class="head">
@@ -15,7 +17,9 @@
 </div>
 {% endblock %}
 </div>
-
+<div class="actions">
+    {% block actions %}{% endblock %}
+</div>
 <div class="page">
 {% block page %}
 <div class="content">

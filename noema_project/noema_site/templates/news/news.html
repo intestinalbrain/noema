@@ -9,6 +9,12 @@
     {% endfor %}
 </div>
 {% endblock %}
+    {% for action in action_list %}
+        <a href="/{{ action.url }}">{{ action.name }}</a>
+    {% endfor %}
+{% block actions %}
+
+{% endblock %}
 
 {% block content %}
 <div class="news_content">

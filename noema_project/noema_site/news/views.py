@@ -11,6 +11,7 @@ def view_news(request):
     news_list = get_context_list(News.objects.all())
     menu_list = get_context_list(Menu.get_noema_menu_item_list())
     title = u'Новости'
+    is_super_user = request.user.is_superuser
     return locals()
 
 
