@@ -3,6 +3,8 @@ __author__ = 'master'
 
 from django.db.models import Model, CharField, AutoField, ForeignKey
 
+from noema_site.context.context import ModelItemContext
+
 
 class Menu(Model):
     id = AutoField(primary_key=True)
@@ -14,6 +16,10 @@ class Menu(Model):
 
     class Meta:
         db_table = 'menu'
+
+    @classmethod
+    def get_noema_menu_item_list(cls):
+        return MenuItem.objects.filter(menu=cls.objects.get(code='noema')).all()
 
 
 class MenuItem(Model):
@@ -28,3 +34,7 @@ class MenuItem(Model):
 
     class Meta:
         db_table = 'menu_item'
+
+
+    def context(self, alias={}):
+        return ModelItemContext(self).compile()

@@ -1,17 +1,17 @@
-from django.shortcuts import render_to_response
+# coding: utf-8
 
 from models import News
-from noema_project.noema_site.menu.models import MenuItem
+from noema_site.menu.models import Menu
+from noema_site.utils import view
 
-def get_context_list(obj_list):
-    return [obj.context() for obj in obj_list]
+from noema_site.context.context import get_context_list
 
-@render_to_response('news/news.html')
+@view('news/news.html')
 def view_news(request):
     news_list = get_context_list(News.objects.all())
-    menu_list = get_context_list(MenuItem.get_noema_menu_list())
+    menu_list = get_context_list(Menu.get_noema_menu_item_list())
     return locals()
 
 
 def view_one_news(request):
-    pass
+    return {}
