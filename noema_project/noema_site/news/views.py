@@ -10,8 +10,9 @@ from noema_site.context.context import get_context_list
 def view_news(request):
     news_list = get_context_list(News.objects.all())
     menu_list = get_context_list(Menu.get_noema_menu_item_list())
+    title = u'Новости'
     return locals()
 
 
-def view_one_news(request):
+def view_one_news(request, news_id):
     return {}

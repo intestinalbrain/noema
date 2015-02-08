@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block title %}{{ title }}{% endblock %}
+
+{% block menu %}
 <div class="menu_noema">
     {% for menu_item in menu_list %}
         <a href="/{{ menu_item.code }}">{{ menu_item.name }}</a>
     {% endfor %}
 </div>
+{% endblock %}
 
+{% block content %}
 <div class="news_content">
     {% if news_list %}
         {% for news in news_list %}
@@ -22,5 +21,6 @@
         <p>К сожалению, новостей пока нет</p>
     {% endif %}
 </div>
+{% endblock %}
 </body>
 </html>

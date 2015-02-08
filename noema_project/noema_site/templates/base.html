@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<div class="head">
+{% block head %}
+<div class="title">
+	{% block title %}{% endblock %}
+</div>
+<div class="menu">
+	{% block menu %}{% endblock %}
+</div>
+{% endblock %}
+</div>
+
+<div class="page">
+{% block page %}
+<div class="content">
+	{% block content %}
+	{% endblock %}
+</div>
+{% endblock %}
+</div>
+
+<div class="footer">
+{% block footer %}
+<div class="copyright">
+	{% block copyright %}
+	{% endblock %}
+</div>
+{% endblock %}
+</div>
+
+</body>
+</html>
