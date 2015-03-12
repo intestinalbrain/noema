@@ -3,7 +3,6 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block menu %}
-
 <div class="menu_noema">
     {% if menu_list %}
     <p>
@@ -31,14 +30,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="news_content">
+<div class="gallery_content">
     {% if news_list %}
         {% for news in news_list %}
             <a href="{% url 'one_news' news.id %} ">{{ news.title }}</a>
             <p>{{ news.preview }}</p>
         {% endfor %}
     {% else %}
-        <p>К сожалению, новостей пока нет</p>
+        <p>К сожалению, галлерея пуста</p>
     {% endif %}
 </div>
 {% endblock %}

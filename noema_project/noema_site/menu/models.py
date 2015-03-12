@@ -18,8 +18,14 @@ class Menu(Model):
         db_table = 'menu'
 
     @classmethod
-    def get_noema_menu_item_list(cls):
-        return MenuItem.objects.filter(menu=cls.objects.get(code='noema')).all()
+    def get_menu_item_list(cls, code):
+        return MenuItem.objects.filter(menu=cls.objects.get(code=code),
+                                       parent=None).all()
+
+    @classmethod
+    def get_submenu_item_list(cls, code, current_menu):
+        return MenuItem.objects.filter(menu=cls.objects.get(code=code),
+                                       parent__code=current_menu).all()
 
 
 class MenuItem(Model):
