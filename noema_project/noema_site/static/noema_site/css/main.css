@@ -1,0 +1,37 @@
+
+
+.header {
+    padding:0;
+    margin:0;
+    background:#000000 url('/static/noema_site/css/images/main.png') top center no-repeat;
+    background-size: cover;
+    bottom: 90%;
+}
+
+.title {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 10%;
+    bottom: 80%;
+}
+
+.menu {
+    position: absolute;
+    width: 100%;
+    font-size: 100%;
+    text-align: center;
+    top: 20%;
+    bottom: 65%;
+}
+
+.content {
+    position: absolute;
+    width: 100%;
+    font-size: 100%;
+    text-align: left;
+    top: 40%;
+    bottom: 10%;
+    left: 20%;
+    right: 20%;
+}

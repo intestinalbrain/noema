@@ -23,12 +23,13 @@
     {% endif %}
 </div>
 {% endblock %}
-    {% for action in action_list %}
-        <a href="/{{ action.url }}">{{ action.name }}</a>
-    {% endfor %}
-{% block actions %}
-
-{% endblock %}
+{% if is_super_user %}
+    {% block actions %}
+        {% for action in action_list %}
+            <a href="/{{ action.url }}/{{ current }}">{{ action.name }}</a>
+        {% endfor %}
+    {% endblock %}
+{% endif %}
 
 {% block content %}
 <div class="news_content">
@@ -42,5 +43,3 @@
     {% endif %}
 </div>
 {% endblock %}
-</body>
-</html>

@@ -1,19 +1,16 @@
 # coding: utf-8
 
 from models import News
-from noema_site.menu.models import Menu
-from noema_site.utils import view
+from noema_site.utils import standard_view
 
 from noema_site.context.context import get_context_list
 
 current_menu = 'news'
 
-@view('news/news.html')
+@standard_view('news/news.html', current_menu)
 def view_news(request):
     news_list = get_context_list(News.objects.all())
-    menu_list = get_context_list(Menu.get_menu_item_list('noema'))
-    submenu_list = get_context_list(Menu.get_submenu_item_list('noema', current_menu))
-    title = u'Новости'
+    current = current_menu
     is_super_user = request.user.is_superuser
     return locals()
 
